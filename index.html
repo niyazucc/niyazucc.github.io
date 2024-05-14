@@ -7,56 +7,46 @@
     </head>
     <body>
         <div class="container mt-5">
-            <div class="card" style="width: 20rem;">
-                <div class="card-header">
-                    Calculator Olang
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            WETFLAG
+                        </div> 
+                        <div class="card-body">
+                            <!-- Bootstrap Form -->
+                            <form id="wetflag">
+                                <div class="mb-3">
+                                    <label class="form-label">Age</label>
+                                    <input type="text" class="form-control" id="age" name="age" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Weight</label>
+                                    <input type="text" class="form-control" id="weight" name="weight" required>
+                                </div>
+                                <!-- Submit Button -->
+                                <button type="button" class="btn btn-primary" onclick="calculateDosage()">Calculate</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <!-- Bootstrap Form -->
-                    <form id="calculatorForm">
-                        <div class="mb-3">
-                            <label class="form-label">Bayaran Bulanan</label>
-                            <input type="text" class="form-control" name="bulanan" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Kos Servis Kereta</label>
-                            <input type="text" class="form-control" name="servis" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Road Tax</label>
-                            <input type="text" class="form-control" name="tax" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Insuran Kenderaan</label>
-                            <input type="text" class="form-control" name="insuran" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Tayar (2 Yearly)</label>
-                            <input type="text" class="form-control" name="tayar" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Bateri (2 Yearly)</label>
-                            <input type="text" class="form-control" name="bateri" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Tol</label>
-                            <input type="text" class="form-control" name="tol" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Parking</label>
-                            <input type="text" class="form-control" name="parking" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Others</label>
-                            <input type="text" class="form-control" name="others" required>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="button" class="btn btn-primary" onclick="calculateTotal()">Calculate</button>
-                    </form>
-
-                    <!-- Display Result -->
-                    <h3 id="totalCost" class="mt-4">Kos Sebenar Bulanan: RM <span id="result">0</span></h3>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <!-- Display Result -->
+                        <span id="result"></span>
+                        <span id="resultfitting"></span>
+                        <span id="resultcroup"></span>
+                        <span id="resultasthma"></span>
+                        <span id="resultalsmedication"></span>
+                        <span id="resultantibiotic"></span>
+                        <span id="resultpremedication"></span>
+                        <span id="resultanaphylaxis"></span>    
+                        <span id="resulthyperkalaemia"></span>
+                        <span id="resulttrauma"></span>
+                        <span id="resulthypoglycemia"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,27 +55,542 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
         <script>
-                            function calculateTotal() {
-                                // Get form element by ID
-                                let form = document.getElementById('calculatorForm');
+                            
+        function calculateDosage() {
+            const age = parseFloat(document.getElementById('age').value);
+            const weight = parseFloat(document.getElementById('weight').value);
 
-                                // Initialize total cost
-                                let totalCost = 0;
+            //wetflag
+            const defib = 4 * weight;
+            const sc = 1 * weight;
+            const overOneYear = (age/4)+4;
+            const anchoredlength = (age/2)+12;
+            const fluidDosage = 10 * weight;
+            const lorazepamDosage = 0.1 * weight;
+            const adrenalineDosage = 0.1 * weight;
+            const glucoseDosage = 2 * weight;
+            const fluidmaxdose = 60 * weight;
 
-                                // Loop through form elements
-                                for (let i = 0; i < form.elements.length; i++) {
-                                    let element = form.elements[i];
+            const tablefirst = `
+            <h3>WetFlag</h3>
+            <table class='table'> 
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Defibrillation (4J/kg)</td>
+                        <td>4 * ${weight}</td>
+                        <td>${defib.toFixed(1)}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>SC (1J, 2J, 4J)</td>
+                        <td>1 * ${weight}, 2 * ${weight}, 4 * ${weight}</td>
+                        <td>${sc.toFixed(1)}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Over 1 year</td>
+                        <td>(Age/4)+ 4 </td>
+                        <td>${overOneYear.toFixed(1)}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Anchored Length</td>
+                        <td>Anchored Length</td>
+                        <td>${anchoredlength.toFixed(1)}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Fluid (10cc/kg NS/blood over 10-12 mins)</td>
+                        <td>10 * ${weight}</td>
+                        <td>${fluidDosage.toFixed(1)} cc</td>
+                        <td>${fluidmaxdose.toFixed(1)}</td>
+                    </tr>
+                    <tr>
+                        <td>Lorazepam (Midazolam) 0.1mg/kg</td>
+                        <td>0.1 * ${weight}</td>
+                        <td>${lorazepamDosage.toFixed(1)} mg</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Adrenaline (0.1ml/kg 1:10000)</td>
+                        <td>0.1 * ${weight}</td>
+                        <td>${adrenalineDosage.toFixed(1)} ml</td>
+                        <td>1 mg</td>
+                    </tr>
+                    <tr>
+                        <td>Glucose (2cc/kg)</td>
+                        <td>2 * ${weight}</td>
+                        <td>${glucoseDosage.toFixed(1)} cc</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        document.getElementById('result').innerHTML = tablefirst;
 
-                                    // Check if element is an input field and has a value
-                                    if (element.type === 'text' && element.value !== '') {
-                                        // Parse input value as float and add to totalCost
-                                        totalCost += parseFloat(element.value);
-                                    }
-                                }
+        //fitting
+        const suppDiazepamLow = 0.2 * weight;
+        const suppDiazepamHigh = 0.5 * weight;
+        const ivValium = 0.2 * weight;
+        const ivPhenytoin = 20 * weight;
+        const ivKeppra = 40 * weight;
+        const pcm = 15 * weight;
 
-                                // Display total cost in result span
-                                document.getElementById('result').textContent = totalCost.toFixed(2); // Display with 2 decimal places
-                            }
+        const tablefitting = `
+            <h3>Fitting (max 2 doses of valium)</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Supp diazepam (0.2-0.5mg/kg)</td>
+                        <td>0.2 * ${weight} - 0.5 * ${weight}</td>
+                        <td>${suppDiazepamLow.toFixed(1)}mg - ${suppDiazepamHigh.toFixed(1)}mg</td>
+                        <td>10 mg</td>
+                    </tr>
+                    <tr>
+                        <td>IV Valium (0.2mg/kg)</td>
+                        <td>0.2 * ${weight}</td>
+                        <td>${ivValium.toFixed(1)}mg</td>
+                        <td>10 mg</td>
+                    </tr>
+                    <tr>
+                        <td>IV Phenytoin (20mg/kg) over 20-30 mins</td>
+                        <td>20 * ${weight}</td>
+                        <td>${ivPhenytoin.toFixed(1)}mg</td>
+                        <td>1250 mg</td>
+                    </tr>
+                    <tr>
+                        <td>IV Keppra (Levetiracetam) - Status Epilepticus (40mg/kg)</td>
+                        <td>40 * ${weight}</td>
+                        <td>${ivKeppra.toFixed(1)}mg</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>PCM (15mg/kg)</td>
+                        <td>15 * ${weight}</td>
+                        <td>${pcm.toFixed(1)}mg</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        document.getElementById('resultfitting').innerHTML = tablefitting;
+
+        //croup 
+        const dexamethasoneDosage = 0.6 * weight;
+        const adrenalineDosages = 0.5 * weight;
+
+        const tablecroup = `
+        <h3>Croup</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Neb Budesonide</td>
+                        <td>-</td>
+                        <td>2mg</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>IV Dexamethasone (0.6mg/kg)</td>
+                        <td>0.6 * ${weight}</td>
+                        <td>${dexamethasoneDosage.toFixed(1)} mg</td>
+                        <td>16 mg</td>
+                    </tr>
+                    <tr>
+                        <td>Neb Adrenaline - Severe Croup (0.5ml/kg)</td>
+                        <td>0.5 * ${weight}</td>
+                        <td>${adrenalineDosages.toFixed(1)} ml</td>
+                        <td>5 ml</td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        document.getElementById('resultcroup').innerHTML = tablecroup;
+
+        //asthma
+        const prednisoloneDosage = 1 * weight;
+        const hydrocortisoneDosage = 4 * weight;
+        const mgso4Dosage = 50 * weight;
+        const mgso4Volume = 100;
+            
+        let nedsalbutamol;
+        if(age < 2){
+            nedsalbutamol = 2.5;
+        }else if(age => 2){
+            nedsalbutamol = 5;
+        }
+
+        let nebatrovent;
+        if (age < 5) {
+            nebatrovent = 2.5;
+            } else if (age >= 5 && age <= 12) {
+                nebatrovent = "2.5 - 5";
+            } else {
+                nebatrovent = 5;
+            }
+
+        const tableasthma = `
+        <h3>Asthma</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr>
+                        <td>Neb Salbutamol/ Ventolin</td>
+                        <td></td>
+                        <td>${nedsalbutamol.toFixed(1)} mg</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Neb Atrovent</td>
+                        <td></td>
+                        <td>${nebatrovent} mg</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Oral Prednisolone (1mg/kg)</td>
+                        <td>1 * ${weight}</td>
+                        <td>${prednisoloneDosage.toFixed(1)} mg</td>
+                        <td>40-60 mg OD</td>
+                    </tr>
+                    <tr>
+                        <td>IV Hydrocortisone (4mg/kg)</td>
+                        <td>4 * ${weight}</td>
+                        <td>${hydrocortisoneDosage.toFixed(1)} mg</td>
+                        <td>100 mg</td>
+                    </tr>
+                    <tr>
+                        <td>IV Mgso4 (50mg/kg) in 100cc NS over 20 mins</td>
+                        <td>50 * ${weight} in ${mgso4Volume} cc NS</td>
+                        <td>${mgso4Dosage.toFixed(1)} mg in ${mgso4Volume} cc NS</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        document.getElementById('resultasthma').innerHTML = tableasthma;
+
+        //ALS Medication
+        const amiodaroneDosage = 5 * weight;
+        const adenosineDosage = 0.1 * weight;
+        const adrenalineDosage3 = 0.1 * weight; // assuming ml/kg as per the given ratio 1:10000
+        const atropineDosage = 0.02 * weight;
+
+        const tablealsmedication = `
+            <h3>ALS Medication</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Amiodarone (5mg/kg) - After 3rd and 5th defib</td>
+                        <td>5 * ${weight}</td>
+                        <td>${amiodaroneDosage.toFixed(1)} mg</td>
+                        <td>300 mg</td>
+                    </tr>
+                    <tr>
+                        <td>Adenosine (0.1mg/kg) - SVT</td>
+                        <td>0.1 * ${weight}</td>
+                        <td>${adenosineDosage.toFixed(1)} mg</td>
+                        <td>6 mg</td>
+                    </tr>
+                    <tr>
+                        <td>Adrenaline (0.1ml/kg 1:10000)</td>
+                        <td>0.1 * ${weight}</td>
+                        <td>${adrenalineDosage3.toFixed(1)} ml</td>
+                        <td>1 mg</td>
+                    </tr>
+                    <tr>
+                        <td>Atropine (0.02mg/kg)</td>
+                        <td>0.02 * ${weight}</td>
+                        <td>${atropineDosage.toFixed(1)} mg</td>
+                        <td>0.6 mg</td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        document.getElementById('resultalsmedication').innerHTML = tablealsmedication;
+
+        //antibiotic
+        const ceftriaxoneDosage = 50 * weight;
+        const cefotaximeDosage = 50 * weight;
+
+        const tableantibiotic = `
+            <h3>Antibiotic</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IV Ceftriaxone (50mg/kg) &gt;3 months</td>
+                        <td>50 * ${weight}</td>
+                        <td>${ceftriaxoneDosage.toFixed(1)} mg</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>IV Cefotaxime (50mg/kg) &lt;3 months</td>
+                        <td>50 * ${weight}</td>
+                        <td>${cefotaximeDosage.toFixed(1)} mg</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        document.getElementById('resultantibiotic').innerHTML = tableantibiotic;
+
+        //premedication
+        const fentanylDosage = 1 * weight; 
+        const midazolamDosage = 0.1 * weight; 
+
+        const tablepremedication = `
+            <h3>Premedication</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IV Fentanyl (1mcg/kg)</td>
+                        <td>1 * ${weight}</td>
+                        <td>${fentanylDosage.toFixed(1)} mcg</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>IV Midazolam (0.1mg/kg)</td>
+                        <td>0.1 * ${weight}</td>
+                        <td>${midazolamDosage.toFixed(1)} mg</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        // Insert the table HTML into the DOM
+        document.getElementById('resultpremedication').innerHTML = tablepremedication;
+
+        //anaphylaxis
+        const hydrocortisoneDosage2 = 4 * weight; // 4 mg/kg
+        const imAdrenalineInfant = 0.1 * weight; // 0.1 ml/kg of 1:10000
+        const imAdrenalineOlderChildren = 0.01 * weight; // 0.01 ml/kg of 1:1000
+        const nebAdrenaline = 0.4 * weight; // 0.4 ml/kg of 1:1000 (1mg/ml)
+        const ivAdrenalineInfusionMin = 0.05 * weight; // 0.05 mcg/kg/min
+        const ivAdrenalineInfusionMax = 2 * weight; // 2 mcg/kg/min
+
+        // Create the table HTML as a string
+        const tableanaphylaxis = `
+        <h3>Anaphylaxis</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Aspect</th>
+                        <th scope='col'>Formula</th>
+                        <th scope='col'>Result</th>
+                        <th scope='col'>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IV Hydrocortisone (4mg/kg)</td>
+                        <td>4 * ${weight}</td>
+                        <td>${hydrocortisoneDosage2.toFixed(1)} mg</td>
+                        <td>100 mg</td>
+                    </tr>
+                    <tr>
+                        <td>Neb Salbutamol/Ventolin</td>
+                        <td>Based on years</td>
+                        <td>${nedsalbutamol} mg</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>IM Adrenaline (Infant, 0.1ml/kg of 1:10000)</td>
+                        <td>0.1 * ${weight}</td>
+                        <td>${imAdrenalineInfant.toFixed(1)} ml</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>IM Adrenaline (Older Children, 0.01ml/kg of 1:1000)</td>
+                        <td>0.01 * ${weight}</td>
+                        <td>${imAdrenalineOlderChildren.toFixed(2)} ml</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Neb Adrenaline (0.4ml/kg of 1:1000 1mg/ml)</td>
+                        <td>0.4 * ${weight}</td>
+                        <td>${nebAdrenaline.toFixed(1)} ml</td>
+                        <td>5 mg</td>
+                    </tr>
+                    <tr>
+                        <td>IV Adrenaline Infusion (0.05-2mcg/kg/min)</td>
+                        <td>0.05-${2} * ${weight}</td>
+                        <td>${ivAdrenalineInfusionMin.toFixed(1)}-${ivAdrenalineInfusionMax.toFixed(1)} mcg/min</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        // Insert the table HTML into the DOM
+        document.getElementById('resultanaphylaxis').innerHTML = tableanaphylaxis;
+
+        //hyperkalaemia 
+        const calciumGluconateDosage = 0.5 * weight; // 0.5 ml/kg
+        const dextroseDosage = 5 * weight; // 5 ml/kg
+        const actrapidDosage = 0.1 * weight; // 0.1 unit/kg
+
+        // Create the table HTML as a string
+        const tablehyperkalaemia = `
+        <h3>Hyperkalaemia</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Formula</th>
+                        <th>Result</th>
+                        <th>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IV Calcium Gluconate 10% (0.5ml/kg) over 10 mins</td>
+                        <td>0.5 * ${weight}</td>
+                        <td>${calciumGluconateDosage.toFixed(1)} ml</td>
+                        <td>20 ml</td>
+                    </tr>
+                    <tr>
+                        <td>IV Dextrose 10% (5ml/kg)</td>
+                        <td>5 * ${weight}</td>
+                        <td>${dextroseDosage.toFixed(1)} ml</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>IV Actrapid (0.1unit/kg)</td>
+                        <td>0.1 * ${weight}</td>
+                        <td>${actrapidDosage.toFixed(1)} units</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        
+        document.getElementById('resulthyperkalaemia').innerHTML = tablehyperkalaemia;
+
+        //trauma
+        const tranexamicAcidDosage = 15 * weight; // 15 mg/kg
+        const bloodProductDosage = 10 * weight; // 10 cc/kg
+
+        const tabletrauma = `
+        <h3>Trauma</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Formula</th>
+                        <th>Result</th>
+                        <th>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IV Tranexamic Acid (15mg/kg)</td>
+                        <td>15 * ${weight}</td>
+                        <td>${tranexamicAcidDosage.toFixed(1)} mg</td>
+                        <td>1000 mg</td>
+                    </tr>
+                    <tr>
+                        <td>Blood Product (10cc/kg over 10-20 mins)</td>
+                        <td>10 * ${weight}</td>
+                        <td>${bloodProductDosage.toFixed(1)} cc</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        // Insert the table HTML into the DOM
+        document.getElementById('resulttrauma').innerHTML = tabletrauma;
+
+        //hypoglycemia
+        const dextroseDosage2 = 2 * weight; // 2 cc/kg
+
+        // Create the table HTML as a string
+        const tablehypoglycemia = `
+        <h3>Hypoglycemia</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Formula</th>
+                        <th>Result</th>
+                        <th>Max Dose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IV Dextrose 10% (2cc/kg)</td>
+                        <td>2 * ${weight}</td>
+                        <td>${dextroseDosage2.toFixed(1)} cc</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        
+        document.getElementById('resulthypoglycemia').innerHTML = tablehypoglycemia;
+        }
+        
+        
         </script>
     </body>
 </html>
