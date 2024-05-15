@@ -20,10 +20,6 @@
                                     <label class="form-label">Age</label>
                                     <input type="text" class="form-control" id="age" name="age" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Weight</label>
-                                    <input type="text" class="form-control" id="weight" name="weight" required>
-                                </div>
                                 <!-- Submit Button -->
                                 <button type="button" class="btn btn-primary" onclick="calculateDosage()">Calculate</button>
                             </form>
@@ -58,7 +54,7 @@
                             
         function calculateDosage() {
             const age = parseFloat(document.getElementById('age').value);
-            const weight = parseFloat(document.getElementById('weight').value);
+            const weight = (age*2)+8;
 
             //wetflag
             const defib = 4 * weight;
